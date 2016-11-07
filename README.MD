@@ -1,4 +1,4 @@
-# Project 3 - Twitter app
+# Project 4 - Twitter Redux app
 
 **Twitter** is a basic twitter app to read and compose tweets from the [Twitter API](https://apps.twitter.com/).
 
