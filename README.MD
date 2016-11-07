@@ -15,6 +15,16 @@ The following **required** functionality is completed:
 - [ x] User can pull to refresh.
 - [ x] User can compose a new tweet by tapping on a compose button.
 - [ x] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
+- [ x] Hamburger menu
+- [ x] Dragging anywhere in the view should reveal the menu.
+- [ x] The menu should include links to your profile, the home timeline, and the mentions view.
+- [ x] The menu can look similar to the example or feel free to take liberty with the UI.
+- [ x] Profile page
+- [ x] Contains the user header view
+- [ x] Contains a section with the users basic stats: # tweets, # following, # followers
+- [ x] Home Timeline
+- [ x] Tapping on a user image should bring up that user's profile page
+
 
 The following **optional** features are implemented:
 
@@ -39,6 +49,8 @@ Please list two areas of the assignment you'd like to **discuss further with you
 Here's a walkthrough of implemented user stories:
 
 <img src="https://github.com/jagdeeparora86/Twitter/raw/master/twitter.gif" title="Video Walkthrough" width="" alt="Video Walkthrough" style="max-width:100%;">
+<img src="https://github.com/jagdeeparora86/Twitter/raw/master/twitter2.gif" title="Video Walkthrough" width="" alt="Video Walkthrough" style="max-width:100%;">
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
