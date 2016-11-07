@@ -21,14 +21,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         tweetTextField.delegate = self
-        tweetTextField.becomeFirstResponder()
         tweetTextField.text = "Whats Happening?"
         tweetTextField.textColor = UIColor.lightGray
         thumbImageView.setImageWith((User.currentUser?.profileImageUrl!)!)
         self.automaticallyAdjustsScrollViewInsets = false
         actionView.layer.borderWidth = 0.5
         actionView.layer.borderColor = UIColor.lightGray.cgColor
-        actionView.layer.cornerRadius  = 5
+        tweetTextField.becomeFirstResponder()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -64,7 +63,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     func keyBoardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.actionView.frame.origin.y = keyboardSize.height + self.actionView.frame.height + 20
+            self.actionView.frame.origin.y = keyboardSize.height + self.actionView.frame.height
         }
         
     }
@@ -76,7 +75,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-
     
     func textViewDidChange(_ textView: UITextView) {
         counter =  140 - tweetTextField.text.characters.count

@@ -18,13 +18,14 @@ class TweetsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UINib(nibName: "TweetCell", bundle: nil), forCellReuseIdentifier: "tweetCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         getHomeTimeLine()
         setupRefreshControl()
-        
+    
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,7 +68,7 @@ class TweetsViewController: UIViewController {
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "DetailSegue" {
+        if segue.identifier == "detailSegue" {
             let cell = sender as! TweetCell
             let navigationController  = segue.destination as! UINavigationController
             let detailViewController = navigationController.topViewController as! DetailViewController
@@ -78,9 +79,8 @@ class TweetsViewController: UIViewController {
         }
         else
             if segue.identifier == "composeSegue" {
-                let navigationController  = segue.destination as! UINavigationController
-                let composeViewController = navigationController.topViewController as! ComposeViewController
-               // composeViewController.tweet = cell.tweet
+//                let navigationController  = segue.destination as! UINavigationController
+//                let composeViewController = navigationController.topViewController as! ComposeViewController
                 
         }
     
@@ -106,6 +106,11 @@ extension TweetsViewController : UITableViewDelegate, UITableViewDataSource {
         cell.tweet = tweets![indexPath.row]
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        performSegue(withIdentifier: "detailSegue", sender: cell)
     }
     
 }

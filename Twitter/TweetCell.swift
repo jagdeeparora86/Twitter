@@ -64,12 +64,30 @@ class TweetCell: UITableViewCell {
 //            
 //            }
             
+            let tap = UITapGestureRecognizer(target: self, action: #selector(onProfileImapTap))
+            tap.delegate = self
+            thumbImageView.addGestureRecognizer(tap)
+
+            
         }
     }
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+    }
+    
+    func setupProfileTap(){
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onProfileImapTap))
+        tap.delegate = self
+        thumbImageView.addGestureRecognizer(tap)
+    }
+    
+    func onProfileImapTap(){
+        print("user Tapped the image")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

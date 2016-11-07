@@ -29,7 +29,11 @@ class LoginViewController: UIViewController {
         twitterClient.deauthorize()
         twitterClient.doLogin(success: { 
             print("login Successfull")
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let hamburgerVewController = storyBoard.instantiateViewController(withIdentifier: "hamburgerViewController") as! HamburgerViewController
+            let menuViewController = storyBoard.instantiateViewController(withIdentifier: "menuViewController")
+            hamburgerVewController.menuViewController = menuViewController
+            self.performSegue(withIdentifier: "hamburgerSegue", sender: nil)
         }) { (error:Error) in
                 print(error.localizedDescription)
         }

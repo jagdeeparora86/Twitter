@@ -37,11 +37,9 @@ class TwitterClient: BDBOAuth1SessionManager {
             TwitterClient.sharedInstance?.userAccount(success: { (user: User) in
                 User.currentUser = user
                 print(user)
+                self.successLogin?()
                 }, faliure: { (error:Error) in
             })
-            
-            self.successLogin?()
-            
         }) { (error: Error?) in
             self.faliureLogin?(error!)
         }
@@ -61,6 +59,41 @@ class TwitterClient: BDBOAuth1SessionManager {
             print("\(respone)")
             let tweets = Tweet.tweetsWithArray(dictionaries:  dictionaries)
             success(tweets)
+        }) { (task:URLSessionDataTask?, error:Error) in
+            faliure(error)
+        }
+    }
+    
+    func userTimeLine(screenName : String, success: @escaping ([Tweet]) -> (), faliure: @escaping (Error) ->()){
+        get("1.1/statuses/user_timeline.json", parameters: ["screen_name": screenName], progress: nil, success: { (task:URLSessionDataTask, respone:Any?) in
+            let dictionaries = respone as! [NSDictionary];
+            print("\(respone)")
+            let tweets = Tweet.tweetsWithArray(dictionaries:  dictionaries)
+            success(tweets)
+        }) { (task:URLSessionDataTask?, error:Error) in
+            faliure(error)
+        }
+    }
+    
+    func mentionTimeLine(success: @escaping ([Tweet]) -> (), faliure: @escaping (Error) ->()){
+        get("1.1/statuses/mentions_timeline.json", parameters: nil, progress: nil, success: { (task:URLSessionDataTask, respone:Any?) in
+            let dictionaries = respone as! [NSDictionary];
+            print("\(respone)")
+            let tweets = Tweet.tweetsWithArray(dictionaries:  dictionaries)
+            success(tweets)
+        }) { (task:URLSessionDataTask?, error:Error) in
+            faliure(error)
+        }
+    }
+  
+    
+    
+    func userInfo(screenName : String, success: @escaping (User) -> (), faliure: @escaping (Error) ->()){
+        get("1.1//users/show.json", parameters: ["screen_name": screenName], progress: nil, success: { (task:URLSessionDataTask, respone:Any?) in
+            let dictionary = respone as! NSDictionary;
+            print("\(respone)")
+            let user  = User(dictionary: dictionary)
+            success(user)
         }) { (task:URLSessionDataTask?, error:Error) in
             faliure(error)
         }

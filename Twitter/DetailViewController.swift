@@ -17,8 +17,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.estimatedRowHeight = 120
         tableView.separatorStyle = .none
         tableView.reloadData()
         
@@ -32,6 +30,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         return 1
     }
     
+    func profileImageTap(){
+        performSegue(withIdentifier: "profileViewSegway", sender: nil)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
@@ -40,13 +42,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         case 0: // handle TweetDetail
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTweetCell", for: indexPath) as! DetailTweetCell
             cell.tweet = self.tweet
-//        case 1:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "counterCell", for: indexPath) as! CounterCell
-//            cell.counterTweet = self.tweet
-//        case 2:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "tweetControlCell", for: indexPath) as! TweetControlCell
-//            cell.actionTweet = self.tweet
-//            cell.delegate = self
+            let tap = UITapGestureRecognizer(target: self, action: #selector(profileImageTap))
+            tap.cancelsTouchesInView = true;
+            cell.thumbImageView.addGestureRecognizer(tap)
+
         default:
             return cell
         }
@@ -58,6 +57,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func goBack(_ sender: AnyObject) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "profileViewSegway" {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.showBack = true
+            profileViewController.userScreenName = (tweet?.user!.screenName)!
+        }
     }
     
 }

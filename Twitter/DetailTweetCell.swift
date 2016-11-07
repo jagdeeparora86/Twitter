@@ -24,7 +24,7 @@ class DetailTweetCell: UITableViewCell {
     
     var tweet : Tweet! {
         didSet {
-            tweetNameLabel.text = tweet.user!.name 
+            tweetNameLabel.text = tweet.user!.name
             thumbImageView.setImageWith(tweet.user!.profileImageUrl!)
             tweetHandleLabel.text = tweet.user!.screenName
             tweetTextLabel.text = tweet.text!
@@ -39,10 +39,15 @@ class DetailTweetCell: UITableViewCell {
             
             favCountLabel.text = "\(tweet.favoriteCount)"
             retweetCountLabel.text = "\(tweet.retweetCount)"
-
+            
         }
     }
     
+    func imageTapped(img: AnyObject)
+    {
+        // Your action
+        print("made it inside the tap bro")
+    }
     @IBAction func doFavorite(_ sender: AnyObject) {
         if !tweet.favorited! {
             callFav()
@@ -131,13 +136,22 @@ class DetailTweetCell: UITableViewCell {
     
     func callDelegate(){
         //        self.delegate?.callActionCell(actionCells: self, tweet: tweet);
-//        switcCell?.switchCell!(switchCell: self, didChanged: tweet)
+        //        switcCell?.switchCell!(switchCell: self, didChanged: tweet)
     }
-
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        print("awaken")
+        
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.test))
+//        tap.delegate = self
+//        thumbImageView.addGestureRecognizer(tap)
+    }
+    
+    func test(){
+        print("test")
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
